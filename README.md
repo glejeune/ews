@@ -1,3 +1,6 @@
 # Ews
 
-** TODO: Add description **
+## Start
+
+  mix deps.get
+  mix run --no-halt
