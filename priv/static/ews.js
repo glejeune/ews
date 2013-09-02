@@ -22,7 +22,7 @@ color.magenta + "   .:kO000KOl,.       " + color.reset + color.white + "   888  
 color.magenta + "  .'kkkO00OkOko'      " + color.reset + color.white + "   888       o  888   888   .o8\"'88b    888   888    \n" + color.reset + 
 color.magenta + " ';cKOxOOOkxkkkx:.    " + color.reset + color.white + "  o888ooooood8 o888o o888o o88'   888o o888o d888b   \n" + color.reset + 
 color.magenta + ".c:d00OkOxxddxxxddo'  \n" + color.reset +
-color.magenta + ":lcdOOO0xdolooddodxxo." + color.reset + "  ooooo   oooooo     oooo            .o8           .oooooo..o oooo                  oooo  oooo  \n" + color.reset +
+color.magenta + ":lcdOOO0xdolooddodxxo." + color.reset + "   ooooo   oooooo     oooo            .o8           .oooooo..o oooo                  oooo  oooo  \n" + color.reset +
 color.magenta + "llldxkOOOxlcloodddxxx:" + color.reset + "   `888.    `888.     .8'            \"888          d8P'    `Y8 `888                  `888  `888 \n" + color.reset +
 color.magenta + "coodddkOOkkxdddxddddd," + color.reset + "    `888.   .8888.   .8'    .ooooo.   888oooo.     Y88bo.       888 .oo.    .ooooo.   888   888 \n" + color.reset +
 color.magenta + ".::clllcldxxxddol:::, " + color.reset + "     `888  .8'`888. .8'    d88' `88b  d88' `88b     `\"Y8888o.   888P\"Y88b  d88' `88b  888   888 \n" + color.reset +
