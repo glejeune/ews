@@ -1,13 +1,15 @@
-defmodule Ews do
+defmodule EWS do
   use Application.Behaviour
 
+  def version, do: "0.0.2-dev"
+  
   def start(_type, _args) do
     Logger.start()
     EWS.Eval.Client.start()
 
     routes = [
-      {"/", Ews.RootHandler, []},
-      {"/websocket", Ews.WebsocketHandler, []},
+      {"/", EWS.RootHandler, []},
+      {"/websocket", EWS.WebsocketHandler, []},
       {"/static/[...]", :cowboy_static, [
         {:directory, {:priv_dir, :ews, ["static"]}},
         {:mimetypes, {&:mimetypes.path_to_mimes/2, :default}}
@@ -18,6 +20,6 @@ defmodule Ews do
                                   [port: 8080],
                                   [env: [dispatch: dispatch]])
     Logger.info("** Server started on port 8080")
-    Ews.Supervisor.start_link
+    EWS.Supervisor.start_link
   end
 end

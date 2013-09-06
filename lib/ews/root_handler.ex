@@ -1,4 +1,4 @@
-defmodule Ews.RootHandler do
+defmodule EWS.RootHandler do
   def init(_transport, req, []) do
     {:ok, req, nil}
   end

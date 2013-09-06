@@ -1,4 +1,4 @@
-defmodule EwsTest do
+defmodule EWSTest do
   use ExUnit.Case
 
   test "the truth" do

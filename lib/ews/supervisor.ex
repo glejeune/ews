@@ -1,4 +1,4 @@
-defmodule Ews.Supervisor do
+defmodule EWS.Supervisor do
   use Supervisor.Behaviour
 
   def start_link do

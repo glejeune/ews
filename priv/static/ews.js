@@ -1,5 +1,5 @@
 var websocket;
-var console;
+var shell;
 var last_prompt = null;
 var color = {
   black:   "\x1b[1;30m",
@@ -33,16 +33,17 @@ color.magenta + "      .......         " + color.reset + "        `8'      `8'  
 $(document).ready(init);
 
 function send(data) {
-  console.pause();
+  shell.pause();
   if(websocket.readyState == websocket.OPEN){
-    websocket.send(data);
+    json = {"command":data, "uuid":readCookie("ews")};
+    websocket.send(JSON.stringify(json));
   } else {
-    term.error('not connected!');
+    shell.error('not connected!');
   }
 }
 
 function init() {
-  console = $('body').terminal(function(command, term) {
+  shell = $('body').terminal(function(command, term) {
     send(command);
   }, {
     greetings: greetings_message,
@@ -54,10 +55,10 @@ function init() {
 }
 
 function start_ws() {
-  console.pause();
+  shell.pause();
 
   if(!("WebSocket" in window)) {
-    console.error("** websockets are not supported!")
+    shell.error("** websockets are not supported!")
   } else {
     host = "ws://localhost:8080/websocket";
     websocket = new WebSocket(host);
@@ -69,11 +70,11 @@ function start_ws() {
 }
 
 function ws_onopen(e) {
-  // console.echo(color.white + "connected" + color.reset);
+  // shell.echo(color.white + "connected" + color.reset);
 }
 
 function ws_onclose(e) {
-  console.echo(color.white + "disconnected" + color.reset);
+  shell.echo(color.white + "disconnected" + color.reset);
 }
 
 function ws_onmessage(e) {
@@ -81,30 +82,40 @@ function ws_onmessage(e) {
     obj = JSON && JSON.parse(e.data) || $.parseJSON(e.data) || nil;
     displayResponse(obj);
   } catch(err) {
-    console.error("** Invalide server response : " + e.data); 
+    shell.error("** Invalide server response : " + e.data); 
     if(last_prompt) {
-      console.set_prompt(last_prompt);
+      shell.set_prompt(last_prompt);
     }
   }
 }
 
 function displayResponse(obj) {
   if(obj.hello) {
-    console.echo(color.green + obj.hello + color.reset);
+    shell.echo(color.green + obj.hello + color.reset);
   }
 
   if(obj.result) {
-    console.echo(color.yellow + obj.result + color.reset);
+    shell.echo(color.yellow + obj.result + color.reset);
+  }
+
+  if(obj.info) {
+    shell.echo(color.white + obj.info + color.reset);
   }
 
   if(obj.error) {
-    console.echo(color.red + obj.error + color.reset);
+    shell.echo(color.red + obj.error + color.reset);
+  }
+
+  if(obj.uuid) {
+    shell.echo(color.green + "== open session : " + obj.uuid + color.reset);
+    eraseCookie("ews");
+    createCookie("ews", obj.uuid, 1);
   }
 
   if(obj.prompt) {
     last_prompt = obj.prompt;
-    console.set_prompt(last_prompt);
+    shell.set_prompt(last_prompt);
   }
 
-  console.resume();
+  shell.resume();
 }

@@ -1,4 +1,4 @@
-defmodule Ews.Mixfile do
+defmodule EWS.Mixfile do
   use Mix.Project
 
   def project do
@@ -11,7 +11,7 @@ defmodule Ews.Mixfile do
   # Configuration for the OTP application
   def application do
     [
-      mod: { Ews, [] },
+      mod: { EWS, [] },
       applications: [:cowboy]
     ]
   end
@@ -22,7 +22,9 @@ defmodule Ews.Mixfile do
     [
       {:cowboy, github: "extend/cowboy"},
       {:mimetypes, github: "spawngrid/mimetypes"},
-      {:lager, github: "basho/lager"}
+      {:lager, github: "basho/lager"},
+      {:shakkei, github: "glejeune/shakkei"},
+      {:jsonex, github: "marcelog/jsonex"}
     ]
   end
 end

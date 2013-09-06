@@ -16,7 +16,7 @@ defmodule EWS.Eval do
       case do_eval(code, config) do
         {:nodata, config} -> {:nodata, config}
         {:data, data, config} -> {:data, data, config}
-        _ -> {:error, '** (error) EWS unknown error'}
+        _ -> {:error, "** (error) EWS unknown error"}
       end
     catch
       kind, error -> 
@@ -87,30 +87,58 @@ defmodule EWS.Eval.Server do
 end
 
 defmodule EWS.Eval.Client do
-  def start do
+  def start(), do: start(:sandbox)
+  def start(uuid) when is_list(uuid), do: start(list_to_atom(uuid))
+  def start(uuid) when is_binary(uuid), do: start(binary_to_atom(uuid))
+  def start(uuid) when is_atom(uuid) do
     pid = EWS.Eval.Server.start()
-    Process.register(pid, :ews_server)
+    Process.register(pid, uuid)
   end
 
-  def run(code) when is_binary(code) do
-    run(String.to_char_list!(code))
+  def run(code) do
+    run(code, :sandbox)
   end
-  def run(code) when is_list(code) do
-    :ews_server <- {:code, code, self}
+  def run(code, uuid) do
+    Logger.info("Run command `#{code}' for UUID #{uuid}")
+    code = case Data.type(code) do
+      :binary -> String.to_char_list!(code)
+      :bitstring -> String.to_char_list!(code)
+      :list -> code
+      _ -> raise "Invalid code type"
+    end
+    uuid = case Data.type(uuid) do
+      :list -> list_to_atom(uuid)
+      :binary -> binary_to_atom(uuid)
+      :bitstring -> binary_to_atom(uuid)
+      :atom -> uuid
+      _ -> raise "Invalid uuid type"
+    end
+
+    uuid <- {:code, code, self}
     receive do
       all -> all
     end
   end
 
-  def prompt do
-    :ews_server <- {:prompt, self}
+  def prompt(), do: prompt(:sandbox)
+  def prompt(uuid) when is_list(uuid), do: prompt(list_to_atom(uuid))
+  def prompt(uuid) when is_binary(uuid), do: prompt(binary_to_atom(uuid))
+  def prompt(uuid) when is_bitstring(uuid), do: prompt(binary_to_atom(uuid))
+  def prompt(uuid) when is_atom(uuid) do
+    Logger.info("Prompt for UUID #{uuid}")
+    uuid <- {:prompt, self}
     receive do
       {:prompt, prompt} -> prompt
     end
   end
 
-  def count do
-    :ews_server <- {:count, self}
+  def count(), do: count(:sandbox)
+  def count(uuid) when is_list(uuid), do: count(list_to_atom(uuid))
+  def count(uuid) when is_binary(uuid), do: count(binary_to_atom(uuid))
+  def count(uuid) when is_bitstring(uuid), do: count(binary_to_atom(uuid))
+  def count(uuid) when is_atom(uuid) do
+    Logger.info("Count for UUID #{uuid}")
+    uuid <- {:count, self}
     receive do
       {:count, value} -> value
     end
