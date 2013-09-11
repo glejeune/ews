@@ -61,7 +61,7 @@ end
 
 defmodule EWS.Eval.Server do
   def start do
-    spawn(__MODULE__, :run, [EWS.Eval.start()])
+    spawn_link(__MODULE__, :run, [EWS.Eval.start()])
   end
 
   def run(config) do

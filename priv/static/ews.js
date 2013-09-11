@@ -60,7 +60,7 @@ function start_ws() {
   if(!("WebSocket" in window)) {
     shell.error("** websockets are not supported!")
   } else {
-    host = "ws://localhost:8080/websocket";
+    host = "ws://localhost:" + http_port + "/websocket";
     websocket = new WebSocket(host);
     websocket.onopen = function(e) { ws_onopen(e) };
     websocket.onclose = function(e) { ws_onclose(e) };

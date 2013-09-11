@@ -12,7 +12,14 @@ defmodule EWS.Mixfile do
   def application do
     [
       mod: { EWS, [] },
-      applications: [:cowboy]
+      applications: [:cowboy],
+      lager: [
+        handlers: [
+          lager_console_backend: :info,
+          lager_file_backend: [file: "error.log", level: :error],
+          lager_file_backend: [file: "console.log", level: :info]
+        ]
+      ]
     ]
   end
 
@@ -24,7 +31,8 @@ defmodule EWS.Mixfile do
       {:mimetypes, github: "spawngrid/mimetypes"},
       {:lager, github: "basho/lager"},
       {:shakkei, github: "glejeune/shakkei"},
-      {:jsonex, github: "marcelog/jsonex"}
+      {:jsonex, github: "marcelog/jsonex"},
+      {:exconfig, github: "yrashk/exconfig"}
     ]
   end
 end

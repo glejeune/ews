@@ -1,10 +1,10 @@
 defmodule EWS.RootHandler do
-  def init(_transport, req, []) do
-    {:ok, req, nil}
+  def init(_transport, req, [config]) do
+    {:ok, req, config}
   end
 
   def handle(req, state) do
-    html = get_html()
+    html = get_html(state.http_port)
     {:ok, req} = :cowboy_req.reply(200, [{"content-type", "text/html"}], html, req)
     {:ok, req, state}
   end
@@ -13,10 +13,11 @@ defmodule EWS.RootHandler do
     :ok
   end
 
-  defp get_html() do
+  defp get_html(port) do
     {:ok, cwd} = File.cwd()
     path = Path.join([cwd, "priv", "index.html"])
-    {:ok, html} = File.read(path)
-    html
+    EEx.eval_file path, [port: port]
+    #{:ok, html} = File.read(path)
+    #html
   end
 end

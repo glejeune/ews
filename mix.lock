@@ -1,6 +1,8 @@
 [ "cowboy": {:git, "git://github.com/extend/cowboy.git", "4a30198f9068cc989616c8088e4b890bc1de259d", []},
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "2f35af5b0a67f591dde5ae4305a9587988a37c0c", [{:ref, "0.1.0"}]},
   "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "c13d10aaed19ef05c2c8362b9b555926e9770902", []},
+  "exconfig": {:git, "git://github.com/yrashk/exconfig.git", "a32762637d366c18477366145c35d5e02428cc53", []},
+  "genx": {:git, "git://github.com/yrashk/genx.git", "1b857fa422a47269d5f151ecababd83f4835527d", []},
   "goldrush": {:git, "git://github.com/DeadZen/goldrush.git", "879c69874a555b2c13498aa4a3da6f6bbbb6a031", [{:tag, "879c69874a"}]},
   "jsonex": {:git, "git://github.com/marcelog/jsonex.git", "feb4a5b8fbb62e3910923a4325795576fa014c34", []},
   "jsx": {:git, "git://github.com/talentdeficit/jsx.git", "cb14b92a228e51f7bdcaa7eb17f035e4a5c0b47d", [{:tag, "v1.3.3"}]},

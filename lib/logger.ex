@@ -1,27 +1,25 @@
 defmodule Logger do
-  def start() do
-    :lager.start()
-  end
+  defdelegate [start(), log(level, pid, message, params)], to: :lager
 
-  def debug(message, params // []) do
-    :lager.log(:debug, self, message, params)
+  def debug(message, params // [], pid // self) do
+    log(:debug, pid, message, params)
   end
-  def info(message, params // []) do
-    :lager.log(:info, self, message, params)
+  def info(message, params // [], pid // self) do
+    log(:info, pid, message, params)
   end
-  def notice(message, params // []) do
-    :lager.log(:notice, self, message, params)
+  def notice(message, params // [], pid // self) do
+    log(:notice, pid, message, params)
   end
-  def warning(message, params // []) do
-    :lager.log(:warning, self, message, params)
+  def warning(message, params // [], pid // self) do
+    log(:warning, pid, message, params)
   end
-  def error(message, params // []) do
-    :lager.log(:error, self, message, params)
+  def error(message, params // [], pid // self) do
+    log(:error, pid, message, params)
   end
-  def alert(message, params // []) do
-    :lager.log(:alert, self, message, params)
+  def alert(message, params // [], pid // self) do
+    log(:alert, pid, message, params)
   end
-  def emergency(message, params // []) do
-    :lager.log(:emergency, self, message, params)
+  def emergency(message, params // [], pid // self) do
+    log(:emergency, pid, message, params)
   end
 end
