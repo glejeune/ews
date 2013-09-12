@@ -28,7 +28,8 @@ color.magenta + "coodddkOOkkxdddxddddd," + color.reset + "    `888.   .8888.   .
 color.magenta + ".::clllcldxxxddol:::, " + color.reset + "     `888  .8'`888. .8'    d88' `88b  d88' `88b     `\"Y8888o.   888P\"Y88b  d88' `88b  888   888 \n" + color.reset +
 color.magenta + " .;:;:;,,,;cccll:;;.  " + color.reset + "      `888.8'  `888.8'     888ooo888  888   888         `\"Y88b  888   888  888ooo888  888   888 \n" + color.reset +
 color.magenta + "   ..,;'..'',,''..    " + color.reset + "       `888'    `888'      888    .o  888   888    oo     .d8P  888   888  888    .o  888   888 \n" + color.reset +
-color.magenta + "      .......         " + color.reset + "        `8'      `8'       `Y8bod8P'  `Y8bod8P'    8\"\"88888P'  o888o o888o `Y8bod8P' o888o o888o\n\n\n" + color.reset
+color.magenta + "      .......         " + color.reset + "        `8'      `8'       `Y8bod8P'  `Y8bod8P'    8\"\"88888P'  o888o o888o `Y8bod8P' o888o o888o\n\n" + color.reset +
+"https://github.com/glejeune/ews\n\n\n"
 
 $(document).ready(init);
 
